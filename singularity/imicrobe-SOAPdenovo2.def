@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%runscript
+    echo "Hello!"
+
+%post
+    apt update
+    apt install -y wget build-essential
+
+    # Install SOAPdenovo2 from source
+    cd /
+    wget https://github.com/aquaskyline/SOAPdenovo2/archive/r241.tar.gz
+    tar -xf r241.tar.gz
+    cd SOAPdenovo2-r241
+    make
+
+    # add environment variables to /environment file
+    echo "\nexport PATH=/SOAPdenovo2-r241:\$PATH" >> /environment
+
+   # create mount points for TACC directories
+   mkdir /home1
+   mkdir /scratch
+   mkdir /work
+
+%test
+    . /environment
+    echo "PATH=${PATH}"
+
+    SOAPdenovo-63mer
