@@ -1,0 +1,139 @@
+{
+    "available": true,
+    "checkpointable": false,
+    "defaultMaxRunTime": "12:00:00",
+    "defaultMemoryPerNode": 32,
+    "defaultNodeCount": 1,
+    "defaultProcessorsPerNode": 16,
+    "defaultQueue": "serial",
+    "deploymentPath": “mbomhoff/applications/imicrobe-SOAPdenovo2/stampede",
+    "deploymentSystem": "data.iplantcollaborative.org",
+    "executionSystem": "tacc-stampede-mbomhoff",
+    "executionType": "HPC",
+    "helpURI": "http://soap.genomics.org.cn/soapdenovo.html",
+    "inputs": [
+        {
+            "details": {
+                "argument": "",
+                "description": "Directory of forward and reverse reads",
+                "label": "Input directory (forward AND reverse reads)",
+                "showArgument": true
+            },
+            "id": "INPUT_DIR",
+            "semantics": {
+                "fileTypes": [
+                    "raw-0"
+                ]
+            },
+            "value": {
+                "default": "this is needed",
+                "required": true,
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": "-s",
+                "description": “Configuration file path",
+                "label": “configFile",
+                "showArgument": true
+            },
+            "id": “CONFIG_FILE",
+            "semantics": {
+                "fileTypes": [
+                    "raw-0"
+                ]
+            },
+            "value": {
+                "default": "this is needed",
+                "required": true,
+                "visible": true
+            }
+        }
+    ],
+    "label": "iMicrobe SOAPdenovo2",
+    "longDescription": "iMicrobe SOAPdenovo2",
+    "modules": [],
+    "name": “imicrobe-SOAPdenovo2",
+    "ontology": [
+        "http://sswapmeet.sswap.info/agave/apps/Application"
+    ],
+    "outputs": [],
+    "parallelism": "SERIAL”,
+    "parameters": [
+        {
+            "details": {
+                "argument": "",
+                "description": “Stage of assembly to execute",
+                "label": “command",
+                "showArgument": true
+            },
+            "id": “command",
+            "semantics": {},
+            "value": {
+                "default": “all",
+                "required": true,
+                "type": "string",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": “-s",
+                "description": “Configuration file path",
+                "label": “configFile",
+                "showArgument": true
+            },
+            "id": “configFile",
+            "semantics": {},
+            "value": {
+                "default": "",
+                "required": true,
+                "type": "string",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": “-o",
+                "description": "prefix of output graph file name",
+                "label": “outputGraph",
+                "showArgument": true
+            },
+            "id": "outputGraph",
+            "semantics": {},
+            "value": {
+                "default": "",
+                "required": true,
+                "type": “string",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": “-K",
+                "description": "kmer(min 13, max 63/127): kmer size",
+                "label": “kmer",
+                "showArgument": true
+            },
+            "id": "kmer",
+            "semantics": {},
+            "value": {
+                "default": “23",
+                "required": true,
+                "type": “number",
+                "visible": true
+            }
+        }
+    ],
+    "shortDescription": "iMicrobe SOAPdenovo2",
+    "tags": [
+        "imicrobe",
+        “SOAPdenovo",
+        “SOAPdenovo2”,
+        “assembly"
+    ],
+    "templatePath": "template.sh",
+    "testPath": "test.sh",
+    "version": "0.0.1"
+}

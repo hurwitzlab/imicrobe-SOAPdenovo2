@@ -1,0 +1,9 @@
+{
+  "name": "imicrobe-SOAPdenovo2-test",
+  "appId": "imicrobe-SOAPdenovo2-0.0.1",
+  "archive": true,
+  "inputs": {
+    "INPUT_DIR": "/iplant/home/mbomhoff/data/imicrobe/SOAPdenovo2"
+    "CONFIG_FILE": "/iplant/home/mbomhoff/data/imicrobe/SOAPdenovo2/test.config"
+  }
+}
