@@ -1,12 +1,11 @@
 {
-    "available": true,
     "checkpointable": false,
     "defaultMaxRunTime": "12:00:00",
     "defaultMemoryPerNode": 32,
     "defaultNodeCount": 1,
     "defaultProcessorsPerNode": 16,
     "defaultQueue": "serial",
-    "deploymentPath": “mbomhoff/applications/imicrobe-SOAPdenovo2/stampede",
+    "deploymentPath": "mbomhoff/applications/imicrobe-SOAPdenovo2/stampede",
     "deploymentSystem": "data.iplantcollaborative.org",
     "executionSystem": "tacc-stampede-mbomhoff",
     "executionType": "HPC",
@@ -34,11 +33,11 @@
         {
             "details": {
                 "argument": "-s",
-                "description": “Configuration file path",
-                "label": “configFile",
+                "description": "Configuration file path",
+                "label": "configFile",
                 "showArgument": true
             },
-            "id": “CONFIG_FILE",
+            "id": "CONFIG_FILE",
             "semantics": {
                 "fileTypes": [
                     "raw-0"
@@ -54,24 +53,24 @@
     "label": "iMicrobe SOAPdenovo2",
     "longDescription": "iMicrobe SOAPdenovo2",
     "modules": [],
-    "name": “imicrobe-SOAPdenovo2",
+    "name": "imicrobe-SOAPdenovo2",
     "ontology": [
         "http://sswapmeet.sswap.info/agave/apps/Application"
     ],
     "outputs": [],
-    "parallelism": "SERIAL”,
+    "parallelism": "SERIAL",
     "parameters": [
         {
             "details": {
                 "argument": "",
-                "description": “Stage of assembly to execute",
-                "label": “command",
+                "description": "Stage of assembly to execute",
+                "label": "command",
                 "showArgument": true
             },
-            "id": “command",
+            "id": "command",
             "semantics": {},
             "value": {
-                "default": “all",
+                "default": "all",
                 "required": true,
                 "type": "string",
                 "visible": true
@@ -79,12 +78,12 @@
         },
         {
             "details": {
-                "argument": “-s",
-                "description": “Configuration file path",
-                "label": “configFile",
+                "argument": "-s",
+                "description": "Configuration file path",
+                "label": "configFile",
                 "showArgument": true
             },
-            "id": “configFile",
+            "id": "configFile",
             "semantics": {},
             "value": {
                 "default": "",
@@ -95,9 +94,9 @@
         },
         {
             "details": {
-                "argument": “-o",
+                "argument": "-o",
                 "description": "prefix of output graph file name",
-                "label": “outputGraph",
+                "label": "outputGraph",
                 "showArgument": true
             },
             "id": "outputGraph",
@@ -105,23 +104,23 @@
             "value": {
                 "default": "",
                 "required": true,
-                "type": “string",
+                "type": "string",
                 "visible": true
             }
         },
         {
             "details": {
-                "argument": “-K",
+                "argument": "-K",
                 "description": "kmer(min 13, max 63/127): kmer size",
-                "label": “kmer",
+                "label": "kmer",
                 "showArgument": true
             },
             "id": "kmer",
             "semantics": {},
             "value": {
-                "default": “23",
+                "default": 23,
                 "required": true,
-                "type": “number",
+                "type": "number",
                 "visible": true
             }
         }
@@ -129,9 +128,9 @@
     "shortDescription": "iMicrobe SOAPdenovo2",
     "tags": [
         "imicrobe",
-        “SOAPdenovo",
-        “SOAPdenovo2”,
-        “assembly"
+        "SOAPdenovo",
+        "SOAPdenovo2",
+        "assembly"
     ],
     "templatePath": "template.sh",
     "testPath": "test.sh",
