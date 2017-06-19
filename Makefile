@@ -18,14 +18,14 @@ jobs-submit:
 	jobs-submit -F stampede/job.json
 
 container:
-	rm -f singularity/$APP.img
-	sudo singularity create --size 512 singularity/$APP.img
-	sudo singularity bootstrap singularity/$APP.img singularity/$APP.def
+	rm -f singularity/$(APP).img
+	sudo singularity create --size 512 singularity/$(APP).img
+	sudo singularity bootstrap singularity/$(APP).img singularity/$(APP).def
 
 iput-container:
-	irm $APP.img
-	iput -K singularity/$APP.img
+	irm $(APP).img
+	iput -K singularity/$(APP).img
 
 iget-container:
-	iget -K $APP.img
-	mv $APP stampede/
+	iget -K $(APP).img
+	mv $(APP) stampede/
