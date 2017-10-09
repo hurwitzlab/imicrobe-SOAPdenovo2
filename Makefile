@@ -1,9 +1,32 @@
-APP=imicrobe-SOAPdenovo2
-VERSION=0.0.1
-EMAIL=mbomhoff@email.arizona.edu
+APP=imicrobe-soapdenovo2
+VERSION = 0.0.2
+EMAIL = $(CYVERSEUSERNAME)@email.arizona.edu
+
+clean:
+	find . \( -name \*.conf -o -name \*.out -o -name \*.log -o -name \*.param -o -name launcher_jobfile_\* \) -exec rm {} \;
+
+container:
+	rm -f stampede/$(APP).img
+	sudo singularity create --size 1000 stampede/$(APP).img
+	sudo singularity bootstrap stampede/$(APP).img singularity/$(APP).def
+	sudo chown --reference=singularity/$(APP).def stampede/$(APP).img
+
+iput-container:
+	iput -fK stampede/$(APP).img
+
+iget-container:
+	iget -fK $(APP).img
+	mv $(APP).img stampede/
+	irm $(APP).img
+
+test:
+	sbatch test.sh
+
+submit-test-job:
+	jobs-submit -F stampede/job.json
 
 files-delete:
-	files-delete $(CYVERSEUSERNAME)/applications/$(APP)-$(VERSION)
+	files-delete -f $(CYVERSEUSERNAME)/applications/$(APP)-$(VERSION)
 
 files-upload:
 	files-upload -F stampede/ $(CYVERSEUSERNAME)/applications/$(APP)-$(VERSION)
@@ -11,21 +34,14 @@ files-upload:
 apps-addupdate:
 	apps-addupdate -F stampede/app.json
 
-test:
-	sbatch test.sh
+deploy-app: clean files-delete files-upload apps-addupdate
 
-jobs-submit:
-	jobs-submit -F stampede/job.json
+share-app:
+	systems-roles-addupdate -v -u <share-with-user> -r USER tacc-stampede-$(CYVERSEUSERNAME)
+	apps-pems-update -v -u <share-with-user> -p READ_EXECUTE $(APP)-$(VERSION)
 
-container:
-	rm -f singularity/$(APP).img
-	sudo singularity create --size 512 singularity/$(APP).img
-	sudo singularity bootstrap singularity/$(APP).img singularity/$(APP).def
+lytic-rsync-dry-run:
+	rsync -n -arvzP --delete --exclude-from=rsync.exclude -e "ssh -A -t hpc ssh -A -t lytic" ./ :project/imicrobe/apps/imicrobe-SOAPdenovo2
 
-iput-container:
-	irm $(APP).img
-	iput -K singularity/$(APP).img
-
-iget-container:
-	iget -K $(APP).img
-	mv $(APP) stampede/
+lytic-rsync:
+	rsync -arvzP --delete --exclude-from=rsync.exclude -e "ssh -A -t hpc ssh -A -t lytic" ./ :project/imicrobe/apps/imicrobe-SOAPdenovo2
