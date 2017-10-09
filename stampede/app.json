@@ -5,126 +5,19 @@
     "defaultNodeCount": 1,
     "defaultProcessorsPerNode": 16,
     "defaultQueue": "serial",
-    "deploymentPath": "mbomhoff/applications/imicrobe-SOAPdenovo2/stampede",
+    "deploymentPath": "jklynch/applications/imicrobe-soapdenovo2-0.0.2/stampede",
     "deploymentSystem": "data.iplantcollaborative.org",
-    "executionSystem": "tacc-stampede-mbomhoff",
+    "executionSystem": "tacc-stampede-jklynch",
     "executionType": "HPC",
     "helpURI": "http://soap.genomics.org.cn/soapdenovo.html",
-    "inputs": [
-        {
-            "details": {
-                "argument": "",
-                "description": "Directory of forward and reverse reads",
-                "label": "Input directory (forward AND reverse reads)",
-                "showArgument": true
-            },
-            "id": "INPUT_DIR",
-            "semantics": {
-                "fileTypes": [
-                    "raw-0"
-                ]
-            },
-            "value": {
-                "default": "this is needed",
-                "required": true,
-                "visible": true
-            }
-        },
-        {
-            "details": {
-                "argument": "-s",
-                "description": "Configuration file path",
-                "label": "configFile",
-                "showArgument": true
-            },
-            "id": "CONFIG_FILE",
-            "semantics": {
-                "fileTypes": [
-                    "raw-0"
-                ]
-            },
-            "value": {
-                "default": "this is needed",
-                "required": true,
-                "visible": true
-            }
-        }
-    ],
     "label": "iMicrobe SOAPdenovo2",
     "longDescription": "iMicrobe SOAPdenovo2",
     "modules": [],
-    "name": "imicrobe-SOAPdenovo2",
+    "name": "imicrobe-soapdenovo2",
     "ontology": [
         "http://sswapmeet.sswap.info/agave/apps/Application"
     ],
-    "outputs": [],
     "parallelism": "SERIAL",
-    "parameters": [
-        {
-            "details": {
-                "argument": "",
-                "description": "Stage of assembly to execute",
-                "label": "command",
-                "showArgument": true
-            },
-            "id": "command",
-            "semantics": {},
-            "value": {
-                "default": "all",
-                "required": true,
-                "type": "string",
-                "visible": true
-            }
-        },
-        {
-            "details": {
-                "argument": "-s",
-                "description": "Configuration file path",
-                "label": "configFile",
-                "showArgument": true
-            },
-            "id": "configFile",
-            "semantics": {},
-            "value": {
-                "default": "",
-                "required": true,
-                "type": "string",
-                "visible": true
-            }
-        },
-        {
-            "details": {
-                "argument": "-o",
-                "description": "prefix of output graph file name",
-                "label": "outputGraph",
-                "showArgument": true
-            },
-            "id": "outputGraph",
-            "semantics": {},
-            "value": {
-                "default": "",
-                "required": true,
-                "type": "string",
-                "visible": true
-            }
-        },
-        {
-            "details": {
-                "argument": "-K",
-                "description": "kmer(min 13, max 63/127): kmer size",
-                "label": "kmer",
-                "showArgument": true
-            },
-            "id": "kmer",
-            "semantics": {},
-            "value": {
-                "default": 23,
-                "required": true,
-                "type": "number",
-                "visible": true
-            }
-        }
-    ],
     "shortDescription": "iMicrobe SOAPdenovo2",
     "tags": [
         "imicrobe",
@@ -134,5 +27,104 @@
     ],
     "templatePath": "template.sh",
     "testPath": "test.sh",
-    "version": "0.0.1"
+    "version": "0.0.2",
+    "inputs": [
+        {
+          "id": "CONFIG_FILE",
+            "details": {
+                "argument": "-s ",
+                "description": "Configuration file path",
+                "label": "configFile",
+                "showArgument": true
+            },
+            "semantics": {
+                "fileTypes": [
+                    "raw-0"
+                ]
+            },
+            "value": {
+                "default": "this is needed",
+                "required": true,
+                "visible": true
+            }
+        },
+        {
+          "id": "FORWARD_READS",
+          "value": {
+            "default": "",
+            "required": false,
+            "visible": true
+          },
+          "semantics": {
+            "fileTypes": [
+              "raw-0"
+            ]
+          },
+          "details": {
+            "description": "Forward Reads Input FASTA/Q File",
+            "label": "Forward Reads",
+            "argument": "-1 ",
+            "showArgument": true,
+            "repeatArgument": true
+          }
+        },
+        {
+          "id": "REVERSE_READS",
+          "value": {
+            "default": "",
+            "required": false,
+            "visible": true
+          },
+          "semantics": {
+            "fileTypes": [
+              "raw-0"
+            ]
+          },
+          "details": {
+            "description": "Reverse Reads Input FASTA/Q File",
+            "label": "Reverse Reads",
+            "argument": "-2 ",
+            "showArgument": true,
+            "repeatArgument": true
+          }
+        },
+        {
+          "id": "SINGLE_ENDED_READS",
+          "value": {
+            "default": "",
+            "required": false,
+            "visible": true
+          },
+          "semantics": {
+            "fileTypes": [
+              "raw-0"
+            ]
+          },
+          "details": {
+            "description": "Single-End Reads Input FASTA/Q File",
+            "label": "Single-End Reads",
+            "argument": "-r ",
+            "showArgument": true,
+            "repeatArgument": true
+          }
+        }
+    ],
+    "parameters": [
+      {
+        "id": "ADDITIONAL_ARGS",
+        "value": {
+          "default": "",
+          "required": false,
+          "type": "string",
+          "visible": true
+        },
+        "details": {
+          "description": "Additional command line arguments for megahit",
+          "label": "Additional Command Line Arguments",
+          "argument": "",
+          "showArgument": false
+        }
+      }
+    ],
+    "outputs": []
 }
