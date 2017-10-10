@@ -14,6 +14,10 @@ From: ubuntu:latest
     apt update
     apt install -y wget build-essential python3
 
+    # install scripts
+    mkdir /scripts
+    cp /imicrobe-SOAPdenovo2/scripts/agave_to_soapdenovo2_cmd_line_args.py /scripts/agave_to_soapdenovo2_cmd_line_args.py
+
     # Install SOAPdenovo2 from source
     cd /
     wget https://github.com/aquaskyline/SOAPdenovo2/archive/r241.tar.gz
