@@ -9,7 +9,7 @@ Usage:
       -some more -options
 
 The config_file_path argument must specify an existing SOAPdenovo2 configuration file, which will be
-extended (overwritten) with the file paths specified by -f1, -f2, -q1, -q2 command line arguments.
+extended (overwritten) with the file paths specified by -f1, -f2, -q1, -q2, et al., command line arguments.
 
 Convert Agave app arguments such as
 
@@ -74,8 +74,14 @@ def extend_config_file_content(config_file_content, agave_cmd_line_args):
 
     # combine FASTA and FASTQ paired-end lists
     extended_config_file_buffer = io.StringIO()
-    extended_config_file_buffer.write(config_file_content)
-    extended_config_file_buffer.write('\n')
+    # remove empty lines because this may cause trouble with SOAPdenovo2 (fact check?)
+    for line in config_file_content.splitlines():
+      stripped_line = line.strip()
+      if len(stripped_line) == 0:
+          pass
+      else:
+        extended_config_file_buffer.write(stripped_line)
+        extended_config_file_buffer.write('\n')
     input_option_table['f'] = list(zip(input_option_table['-f1'], input_option_table['-f2']))
     input_option_table['q'] = list(zip(input_option_table['-q1'], input_option_table['-q2']))
 
@@ -121,8 +127,9 @@ def test_agave_to_soapdenovo2_cmd_line_args():
 
 
 def test_paired_end_fasta_conversions():
+    # throw in some extra newlines to see that they are removed
     extended_config_file_content = extend_config_file_content(
-        '[LIB]',
+        '[LIB]\n\n',
         ['-f1', 'file1.fa', '-f2', 'file2.fa', '-f1', 'file3.fa', '-f2', 'file4.fa']
     )
 
