@@ -33,5 +33,5 @@ From: ubuntu:latest
     . /environment
     echo "PATH=${PATH}"
 
-    python3
+    python3 --version
     SOAPdenovo-63mer
