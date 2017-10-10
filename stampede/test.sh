@@ -32,4 +32,9 @@ fi
 
 mkdir -p $OUTPUT_DIR
 
-./run.sh $CONFIG_FILE -o $OUTPUT_DIR/test-output-graph -q1 $INPUT_FILE_1 -q2 $INPUT_FILE_2
+./run.sh \
+    --config-fp $CONFIG_FILE \
+    --output-dir $OUTPUT_DIR \
+    --output-graph-prefix test-output-graph \
+    -q1 $INPUT_FILE_1 \
+    -q2 $INPUT_FILE_2
