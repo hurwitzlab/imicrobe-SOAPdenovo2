@@ -24,13 +24,12 @@ INPUT_FILE_1=$INPUT_DIR/fragScSi_1.fq
 INPUT_FILE_2=$INPUT_DIR/fragScSi_2.fq
 CONFIG_FILE=$INPUT_DIR/test.config
 
-#OUTPUT_DIR="$SCRATCH/imicrobe-soapdenovo2/test/output"
-OUTPUT_GRAPH="test-output-graph"
+OUTPUT_DIR="soapdenovo2-out/"
 
-if [[ -d $OUT_DIR ]]; then
-  rm -rf $OUT_DIR
+if [[ -d $OUTPUT_DIR ]]; then
+  rm -rf $OUTPUT_DIR
 fi
 
-mkdir -p $OUT_DIR
+mkdir -p $OUTPUT_DIR
 
-./run.sh $CONFIG_FILE -o $OUTPUT_GRAPH -q1 $INPUT_FILE_1 -q2 $INPUT_FILE_2
+./run.sh $CONFIG_FILE -o $OUTPUT_DIR/test-output-graph -q1 $INPUT_FILE_1 -q2 $INPUT_FILE_2
