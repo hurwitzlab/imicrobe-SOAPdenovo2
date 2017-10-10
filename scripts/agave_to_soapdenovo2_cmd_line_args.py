@@ -95,17 +95,17 @@ def extend_config_file_content(config_file_content, agave_cmd_line_args):
 
 if __name__ == '__main__':
     # parse arguments - get the config file path and everything else
-    config_fp, all_other_args = agave_to_soapdenovo2_cmd_line_args(sys.argv)
+    script_args, all_other_args = agave_to_soapdenovo2_cmd_line_args(sys.argv)
     # read the config file
     config_file_content = io.StringIO()
-    with open(config_fp, 'rt') as config_file:
+    with open(script_args.config_fp, 'rt') as config_file:
         config_file_content.write(config_file.read())
     extended_config_file_content = extend_config_file_content(config_file_content, all_other_args)
-    # write the extended config file
-    with open(config_fp, 'wt') as config_file:
+    # overwrite config_fp with the extended config file
+    with open(script_args.config_fp, 'wt') as config_file:
         config_file.write(extended_config_file_content)
 
-    print('all -s {}'.format(config_fp))
+    print('all -s {}'.format(script_args.config_fp))
 
 
 def test_agave_to_soapdenovo2_cmd_line_args():
