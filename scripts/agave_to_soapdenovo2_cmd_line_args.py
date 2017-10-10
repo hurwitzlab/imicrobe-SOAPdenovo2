@@ -80,7 +80,6 @@ def extend_config_file_content(config_file_content, agave_cmd_line_args):
     input_option_table['q'] = list(zip(input_option_table['-q1'], input_option_table['-q2']))
 
     for opt, arg_list in [(opt_, input_option_table[opt_]) for opt_ in ('f', 'q')]:
-        print(arg_list)
         while len(arg_list) > 0:
             fp1, fp2 = arg_list.pop(0)
             extended_config_file_buffer.write('{}1={}\n'.format(opt, fp1))
