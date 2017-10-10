@@ -48,13 +48,9 @@ def get_args(argv):
         required=False,
         default=os.path.join(os.getcwd(), 'soapdenovo2-out'),
         help='Directory for SOAPdenovo2 output.')
-    return arg_parser.parse_known_args(args=argv)
-
-
-def agave_to_soapdenovo2_cmd_line_args(argv):
-    script_args, agave_cmd_line_args = get_args(argv)
-
-    return script_args, agave_cmd_line_args
+    # parse_known_args does not ignore the first element of argv so remove it first
+    # otherwise the config_fp parameter is set to this script
+    return arg_parser.parse_known_args(args=argv[1:])
 
 
 def extend_config_file_content(config_file_content, agave_cmd_line_args):
@@ -95,7 +91,7 @@ def extend_config_file_content(config_file_content, agave_cmd_line_args):
 
 if __name__ == '__main__':
     # parse arguments - get the config file path and everything else
-    script_args, all_other_args = agave_to_soapdenovo2_cmd_line_args(sys.argv)
+    script_args, all_other_args = get_args(sys.argv)
     # read the config file
     config_file_content = io.StringIO()
     with open(script_args.config_fp, 'rt') as config_file:
@@ -110,15 +106,15 @@ if __name__ == '__main__':
 
 def test_agave_to_soapdenovo2_cmd_line_args():
     # default output directory
-    script_args, cmd_line_args = agave_to_soapdenovo2_cmd_line_args(['configfile', '-f1', 'file1.fa', '-f2', 'file2.fa'])
+    script_args, cmd_line_args = get_args(['this_script.py', 'configfile', '-f1', 'file1.fa', '-f2', 'file2.fa'])
     assert script_args.config_fp == 'configfile'
     assert script_args.output_dir == os.path.join(os.getcwd(), 'soapdenovo2-out')
 
     assert cmd_line_args == ['-f1', 'file1.fa', '-f2', 'file2.fa']
 
     # specified output directory
-    script_args, cmd_line_args = agave_to_soapdenovo2_cmd_line_args(
-        ['configfile', '-o', '/output/dir', '-f1', 'file1', '-f2', 'file2']
+    script_args, cmd_line_args = get_args(
+        ['this_script.py', 'configfile', '-o', '/output/dir', '-f1', 'file1', '-f2', 'file2']
     )
     assert script_args.config_fp == 'configfile'
     assert script_args.output_dir == '/output/dir'
