@@ -19,7 +19,7 @@ fi
 mkdir -p $INPUT_DIR
 iget /iplant/home/shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_1.fq $INPUT_DIR
 iget /iplant/home/shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_2.fq $INPUT_DIR
-iget /iplant/home/jklynch/test/imicrobe-soapdenovo2/test.config $INPUT_DIR
+cp ../test/test.config $INPUT_DIR
 INPUT_FILE_1=$INPUT_DIR/fragScSi_1.fq
 INPUT_FILE_2=$INPUT_DIR/fragScSi_2.fq
 CONFIG_FILE=$INPUT_DIR/test.config
