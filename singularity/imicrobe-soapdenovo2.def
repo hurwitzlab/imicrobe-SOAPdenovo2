@@ -2,11 +2,17 @@ Bootstrap: docker
 From: ubuntu:latest
 
 %runscript
-    echo "Hello!"
+    . /environment
+    SOAPdenovo-63mer $@
+
+%setup
+    # mount the imicrobe-SOAPdenovo2 directory for use in %post as /imicrobe-SOAPdenovo2
+    mkdir "$SINGULARITY_ROOTFS/imicrobe-SOAPdenovo2"
+    mount --no-mtab --bind `pwd` "$SINGULARITY_ROOTFS/imicrobe-SOAPdenovo2"
 
 %post
     apt update
-    apt install -y wget build-essential
+    apt install -y wget build-essential python3
 
     # Install SOAPdenovo2 from source
     cd /
@@ -27,4 +33,5 @@ From: ubuntu:latest
     . /environment
     echo "PATH=${PATH}"
 
+    python3
     SOAPdenovo-63mer
