@@ -100,7 +100,7 @@ if __name__ == '__main__':
     config_file_content = io.StringIO()
     with open(script_args.config_fp, 'rt') as config_file:
         config_file_content.write(config_file.read())
-    extended_config_file_content = extend_config_file_content(config_file_content, all_other_args)
+    extended_config_file_content = extend_config_file_content(config_file_content.getvalue(), all_other_args)
     # overwrite config_fp with the extended config file
     with open(script_args.config_fp, 'wt') as config_file:
         config_file.write(extended_config_file_content)
