@@ -28,6 +28,7 @@ leave normal SOAPdenovo2 command line args alone.
 """
 import argparse
 import io
+import os
 import sys
 
 
@@ -40,11 +41,9 @@ def get_args(argv):
     :return: (1-ple of config file, tuple of everything else)
     """
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('config_fp')
-    arg_parser.add_argument(
-        '-o', '--output_graph',
-        required=True,
-        help='Prefix for output graph.')
+    arg_parser.add_argument('--config-fp', required=True, help='Path to configuration file.')
+    arg_parser.add_argument('--output-dir', required=True, help='Path to output directory')
+    arg_parser.add_argument('--output-graph-prefix', required=True, help='Prefix for output graph files.')
     # parse_known_args does not ignore the first element of argv so remove it first
     # otherwise the config_fp parameter is set to this script
     return arg_parser.parse_known_args(args=argv[1:])
@@ -103,6 +102,16 @@ def extend_config_file_content(config_file_content, agave_cmd_line_args):
     return extended_config_file_buffer.getvalue()
 
 
+def get_soapdenovo2_cmd_line(script_args):
+    return 'all -s {} -o {}'.format(
+        script_args.config_fp,
+        os.path.join(
+            script_args.output_dir,
+            script_args.output_graph_prefix
+        )
+    )
+
+
 if __name__ == '__main__':
     # parse arguments - get the config file path and everything else
     script_args, all_other_args = get_args(sys.argv)
@@ -115,17 +124,26 @@ if __name__ == '__main__':
     with open(script_args.config_fp, 'wt') as config_file:
         config_file.write(extended_config_file_content)
 
-    print('all -s {} -o {}'.format(script_args.config_fp, script_args.output_graph))
+    soapdenovo2_cmd_line = get_soapdenovo2_cmd_line(script_args)
+    print(soapdenovo2_cmd_line)
 
 
 def test_agave_to_soapdenovo2_cmd_line_args():
     script_args, cmd_line_args = get_args(
         [
-            'this_script.py', 'configfile', '-o', 'output-graph-prefix', '-f1', 'file1.fa', '-f2', 'file2.fa'
+            'this_script.py',
+            '--config-fp', 'configfile',
+            '--output-dir', '/output/dir',
+            '--output-graph-prefix', 'output.graph.prefix',
+            '-f1', 'file1.fa',
+            '-f2', 'file2.fa'
         ]
     )
     assert script_args.config_fp == 'configfile'
-    assert script_args.output_graph == 'output-graph-prefix'
+    assert script_args.output_dir == '/output/dir'
+    assert script_args.output_graph_prefix == 'output.graph.prefix'
+
+    assert get_soapdenovo2_cmd_line(script_args) == 'all -s configfile -o /output/dir/output.graph.prefix'
 
     assert cmd_line_args == ['-f1', 'file1.fa', '-f2', 'file2.fa']
 
