@@ -22,7 +22,7 @@ iget /iplant/home/shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_R
 iget /iplant/home/jklynch/test/imicrobe-soapdenovo2/test.config $INPUT_DIR
 INPUT_FILE_1=$INPUT_DIR/fragScSi_1.fq
 INPUT_FILE_2=$INPUT_DIR/fragScSi_2.fq
-$CONFIG_FILE=$INPUT_DIR/test.config
+CONFIG_FILE=$INPUT_DIR/test.config
 
 OUT_DIR="$SCRATCH/imicrobe-soapdenovo2/test/output"
 
