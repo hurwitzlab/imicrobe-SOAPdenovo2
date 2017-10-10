@@ -2,28 +2,10 @@
 
 module load singularity
 
-INPUT_DIR=$1
-OUTPUT_DIR=$2
+SOAPDENOVO2_CMD_LINE_ARGS=`singularity exec imicrobe-soapdenovo2.img python3 /scripts/agave_to_soapdenovo2_cmd_line_args.py $@`
 
-echo "starting directory : `pwd`"
-echo "`ls -l`"
-echo "input directory    : ${INPUT_DIR}"
-echo "output directory   : ${OUTPUT_DIR}"
+echo "SOAPdenovo2 command line args: \"${SOAPDENOVO2_CMD_LINE_ARGS}\""
+echo "SOAPdenovo2 configuration file:"
+cat $1
 
-export LAUNCHER_DIR="$HOME/src/launcher"
-export LAUNCHER_PLUGIN_DIR=$LAUNCHER_DIR/plugins
-export LAUNCHER_WORKDIR=${OUTPUT_DIR}
-export LAUNCHER_RMI=SLURM
-
-export LAUNCHER_JOB_FILE=`pwd`/launcher_jobfile_${SLURM_JOB_ID}
-echo ${LAUNCHER_JOB_FILE}
-singularity exec imicrobe-SOAPdenovo2.img /SOAPdenovo2-r241/SOAPdenovo-63mer \
-   -s ${CONFIG_FILE} \
-   -K ${kmer} \
-   -o ${OUTPUT_DIR}
-
-sleep 10
-export LAUNCHER_PPN=2
-
-$LAUNCHER_DIR/paramrun
-echo "Ended launcher"
+singularity run imicrobe-soapdenovo2.img ${SOAPDENOVO2_CMD_LINE_ARGS}
