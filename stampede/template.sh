@@ -17,14 +17,7 @@ sh run.sh \
     ${CONFIG_FP} \
     --output-dir `pwd` \
     ${OUTPUT_GRAPH_PREFIX} \
-    ${SINGLE_END_FA} \
-    ${SINGLE_END_FQ} \
-    ${PAIRED_END_COMBINED_FA} \
-    ${PAIRED_END_COMBINED_BAM} \
-    ${FORWARD_FA} \
-    ${REVERSE_FA} \
-    ${FORWARD_FQ} \
-    ${REVERSE_FQ}
+    ${SINGLE_END_FA} ${SINGLE_END_FQ} ${PAIRED_END_COMBINED_FA} ${PAIRED_END_COMBINED_BAM} ${FORWARD_FA} ${REVERSE_FA} ${FORWARD_FQ} ${REVERSE_FQ}
 
 echo "Ended $(date)"
 exit 0
