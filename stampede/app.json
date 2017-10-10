@@ -32,9 +32,9 @@
         {
           "id": "CONFIG_FILE",
             "details": {
-                "argument": "-s ",
+                "argument": "--config-file ",
                 "description": "Configuration file path",
-                "label": "configFile",
+                "label": "configuration file",
                 "showArgument": true
             },
             "semantics": {
@@ -43,13 +43,13 @@
                 ]
             },
             "value": {
-                "default": "this is needed",
+                "default": "",
                 "required": true,
                 "visible": true
             }
         },
         {
-          "id": "FORWARD_READS",
+          "id": "FORWARD_FA",
           "value": {
             "default": "",
             "required": false,
@@ -61,15 +61,15 @@
             ]
           },
           "details": {
-            "description": "Forward Reads Input FASTA/Q File",
-            "label": "Forward Reads",
-            "argument": "-1 ",
+            "description": "Forward Reads Input FASTA File",
+            "label": "Forward Reads FASTA",
+            "argument": "-f1 ",
             "showArgument": true,
             "repeatArgument": true
           }
         },
         {
-          "id": "REVERSE_READS",
+          "id": "REVERSE_FA",
           "value": {
             "default": "",
             "required": false,
@@ -81,15 +81,15 @@
             ]
           },
           "details": {
-            "description": "Reverse Reads Input FASTA/Q File",
-            "label": "Reverse Reads",
-            "argument": "-2 ",
+            "description": "Reverse Reads Input FASTA File",
+            "label": "Reverse Reads FASTA",
+            "argument": "-f2 ",
             "showArgument": true,
             "repeatArgument": true
           }
         },
         {
-          "id": "SINGLE_ENDED_READS",
+          "id": "SINGLE_END_FA",
           "value": {
             "default": "",
             "required": false,
@@ -101,15 +101,30 @@
             ]
           },
           "details": {
-            "description": "Single-End Reads Input FASTA/Q File",
-            "label": "Single-End Reads",
-            "argument": "-r ",
+            "description": "Single-End Reads Input FASTA File",
+            "label": "Single-End Reads FASTA",
+            "argument": "-f ",
             "showArgument": true,
             "repeatArgument": true
           }
         }
     ],
     "parameters": [
+      {
+        "id": "OUTPUT_GRAPH_PREFIX",
+          "details": {
+              "argument": "--output-graph-prefix ",
+              "description": "Output file prefix.",
+              "label": "output graph prefix",
+              "showArgument": true
+          },
+          "value": {
+              "default": "output.graph.prefix",
+              "required": true,
+              "type": "string",
+              "visible": true
+          }
+      },
       {
         "id": "ADDITIONAL_ARGS",
         "value": {
