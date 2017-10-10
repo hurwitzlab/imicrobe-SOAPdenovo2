@@ -3,7 +3,7 @@ Usage:
 
   python agave_to_soapdenovo2_cmd_line-args.py \
       config_file_path \
-      -o /path/to/output/directory \
+      -o output-graph \
       -q1 /path/to/forward/reads \
       -q2 /path/to/reverse/reads \
       -some more -options
@@ -20,8 +20,7 @@ to SOAPdenovo2 configuration file lines such as
   q1=file1
   q2=file2
 
-In addition the optional -o argument specifies the output directory. If it is
-not given then the default '$PWD/soapdenovo2-out' will be passed to SOAPdenovo2.
+The required -o argument specifies the output graph prefix.
 
 Since this script may also be invoked in contexts other than an Agave job it should
 leave normal SOAPdenovo2 command line args alone.
@@ -29,7 +28,6 @@ leave normal SOAPdenovo2 command line args alone.
 """
 import argparse
 import io
-import os
 import sys
 
 
@@ -44,10 +42,9 @@ def get_args(argv):
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('config_fp')
     arg_parser.add_argument(
-        '-o', '--output_dir',
-        required=False,
-        default=os.path.join(os.getcwd(), 'soapdenovo2-out'),
-        help='Directory for SOAPdenovo2 output.')
+        '-o', '--output_graph',
+        required=True,
+        help='Prefix for output graph.')
     # parse_known_args does not ignore the first element of argv so remove it first
     # otherwise the config_fp parameter is set to this script
     return arg_parser.parse_known_args(args=argv[1:])
@@ -106,24 +103,19 @@ if __name__ == '__main__':
     with open(script_args.config_fp, 'wt') as config_file:
         config_file.write(extended_config_file_content)
 
-    print('all -s {}'.format(script_args.config_fp))
+    print('all -s {} -o {}'.format(script_args.config_fp, script_args.output_graph))
 
 
 def test_agave_to_soapdenovo2_cmd_line_args():
-    # default output directory
-    script_args, cmd_line_args = get_args(['this_script.py', 'configfile', '-f1', 'file1.fa', '-f2', 'file2.fa'])
-    assert script_args.config_fp == 'configfile'
-    assert script_args.output_dir == os.path.join(os.getcwd(), 'soapdenovo2-out')
-
-    assert cmd_line_args == ['-f1', 'file1.fa', '-f2', 'file2.fa']
-
-    # specified output directory
     script_args, cmd_line_args = get_args(
-        ['this_script.py', 'configfile', '-o', '/output/dir', '-f1', 'file1', '-f2', 'file2']
+        [
+            'this_script.py', 'configfile', '-o', 'output-graph-prefix', '-f1', 'file1.fa', '-f2', 'file2.fa'
+        ]
     )
     assert script_args.config_fp == 'configfile'
-    assert script_args.output_dir == '/output/dir'
-    assert cmd_line_args == ['-f1', 'file1', '-f2', 'file2']
+    assert script_args.output_graph == 'output-graph-prefix'
+
+    assert cmd_line_args == ['-f1', 'file1.fa', '-f2', 'file2.fa']
 
 
 def test_paired_end_fasta_conversions():
