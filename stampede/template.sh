@@ -14,8 +14,8 @@ echo "FORWARD_FQ              \"${FORWARD_FQ}\""
 echo "REVERSE_FQ              \"${REVERSE_FQ}\""
 
 sh run.sh \
-    ${CONFIG_FP} \
-    --output-dir `pwd` \
+    ${CONFIG_FILE} \
+    --output-dir soapdenovo2-out \
     ${OUTPUT_GRAPH_PREFIX} \
     ${SINGLE_END_FA} ${SINGLE_END_FQ} ${PAIRED_END_COMBINED_FA} ${PAIRED_END_COMBINED_BAM} ${FORWARD_FA} ${REVERSE_FA} ${FORWARD_FQ} ${REVERSE_FQ}
 
