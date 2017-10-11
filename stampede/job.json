@@ -1,9 +1,13 @@
 {
-  "name": "imicrobe-SOAPdenovo2-test",
-  "appId": "imicrobe-SOAPdenovo2-0.0.1",
+  "name": "imicrobe-soapdenovo2-test",
+  "appId": "imicrobe-soapdenovo2-0.0.2",
   "archive": true,
   "inputs": {
-    "INPUT_DIR": "/iplant/home/mbomhoff/data/imicrobe/SOAPdenovo2",
-    "CONFIG_FILE": "/iplant/home/mbomhoff/data/imicrobe/SOAPdenovo2/test.config"
+    "CONFIG_FILE": "/iplant/home/jklynch/test/imicrobe-soapdenovo2/test.config",
+    "FORWARD_FQ": "/iplant/home/shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_1.fq",
+    "REVERSE_FQ": "/iplant/home/shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_2.fq"
+  },
+  "parameters": {
+    "OUTPUT_GRAPH_PREFIX": "test-output-graph-prefix"
   }
 }
