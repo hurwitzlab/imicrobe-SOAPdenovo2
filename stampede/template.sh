@@ -13,6 +13,8 @@ echo "REVERSE_FA              \"${REVERSE_FA}\""
 echo "FORWARD_FQ              \"${FORWARD_FQ}\""
 echo "REVERSE_FQ              \"${REVERSE_FQ}\""
 
+mkdir soapdenovo2-out
+
 sh run.sh \
     ${CONFIG_FILE} \
     --output-dir soapdenovo2-out \
