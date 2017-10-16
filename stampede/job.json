@@ -8,6 +8,6 @@
     "REVERSE_FQ": "shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_2.fq"
   },
   "parameters": {
-    "OUTPUT_GRAPH_PREFIX": "test-output-graph-prefix"
+    "OUTPUT_GRAPH_PREFIX": "test-output-graph"
   }
 }
