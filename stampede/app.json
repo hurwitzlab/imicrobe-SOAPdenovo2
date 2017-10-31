@@ -194,7 +194,7 @@
           "visible": true
         },
         "details": {
-          "description": "Additional command line arguments for megahit",
+          "description": "Additional command line arguments for SOAPdenovo2",
           "label": "Additional Command Line Arguments",
           "argument": "",
           "showArgument": false
