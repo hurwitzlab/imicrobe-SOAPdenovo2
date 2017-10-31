@@ -25,6 +25,9 @@ test:
 submit-test-job:
 	jobs-submit -F stampede/job.json
 
+submit-public-test-job:
+	jobs-submit -F stampede/public-job.json
+
 files-delete:
 	files-delete -f $(CYVERSEUSERNAME)/applications/$(APP)-$(VERSION)
 

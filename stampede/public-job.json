@@ -1,0 +1,13 @@
+{
+  "name": "imicrobe-soapdenovo2-public-test",
+  "appId": "imicrobe-soapdenovo2-0.0.2u1",
+  "archive": true,
+  "inputs": {
+    "CONFIG_FILE": "jklynch/test/imicrobe-soapdenovo2/test.config",
+    "FORWARD_FQ": "shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_1.fq",
+    "REVERSE_FQ": "shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_2.fq"
+  },
+  "parameters": {
+    "OUTPUT_GRAPH_PREFIX": "public-test-output-graph"
+  }
+}
