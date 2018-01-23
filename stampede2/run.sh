@@ -1,6 +1,6 @@
 #!/bin/bash
 
-module load singularity
+module load tacc-singularity
 
 echo "$@"
 
