@@ -3,7 +3,7 @@
   "appId": "imicrobe-soapdenovo2-0.0.3u1",
   "archive": true,
   "inputs": {
-    "CONFIG_FILE": "jklynch/test/imicrobe-soapdenovo2/test.config",
+    "CONFIG_FILE": "agave://data.iplantcollaborative.org/shared/imicrobe/test/apps/imicrobe-soapdenovo2/test.config",
     "FORWARD_FQ": "shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_1.fq",
     "REVERSE_FQ": "shared/iplant_training/genome_assembly_soapdenovo/A_Assemble_Reads/fragScSi_2.fq"
   },
